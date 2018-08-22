@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="sr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Obucite Matorog i povedite u šetnju!</title>
+        <meta name="description" content="Majice Hooloovoo MatoriDev">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div id="hlv-tshirts">
+            <div id="hlv-tshirts-voting">
+                <div id="hlv-tshirts-voting-vote-blue">000</div>
+                <div id="hlv-tshirts-voting-vote-yellow">000</div>
+                <h1>Obuci <span>matorog</span></h1>
+            </div>
+            <div id="hlv-tshirts-preview">
+                <div id="hlv-tshirts-preview-blue">
+                    <div class="hlv-tshirts-preview-shirt">
+                        <div class="hlv-tshirts-preview-stickytape">
+                            <div class="hlv-tshirts-preview-head"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="hlv-tshirts-select-sides"><<span>select side</span>></div>
+                <div id="hlv-tshirts-preview-yellow">
+                    <div class="hlv-tshirts-preview-shirt">
+                        <div class="hlv-tshirts-preview-stickytape">
+                            <div class="hlv-tshirts-preview-head"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>&copy; 2018 Hooloovoo | All nudes reserved. | No quokkas were harmed during coding.</footer>
+        </div>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript">
+            $( document ).ready( function() {
+                // Blue shirt
+                var blueShirt = $('#hlv-tshirts-voting-vote-blue');
+
+                // Yellow shirt
+                var yellowShirt = $('#hlv-tshirts-voting-vote-yellow');
+
+                // Votes are cast
+                var ifVotesCast = false;
+
+                // Check if votes have been cast
+                if(blueShirt.text() !== '000' || yellowShirt.text() !== '000') {
+                    ifVotesCast = true;
+                } else {
+                    ifVotesCast = false;
+                }
+
+                // Show Thank you div only when there are votes
+                if(ifVotesCast) {
+                    $('body').append('<div id="hlv-tshirts-hvala"></div>');
+                    // Fade in shirts
+                    setTimeout( function() {
+                        $('#hlv-tshirts').fadeIn();
+                    }, 1200);
+                } else {
+                    // Fade in shirts
+                    setTimeout( function() {
+                        $('#hlv-tshirts').fadeIn();
+                    }, 150);
+                }
+
+                // Hide Thank you div (since the animation is in CSS)
+                setTimeout( function() {
+                    $( "#hlv-tshirts-hvala" ).hide();
+                    $( "#hlv-tshirts-hvala-cover" ).hide();
+                }, 1950);
+
+                // Scale up pole leader
+                var blueVotes = parseInt($(blueShirt).text());
+                var yellowVotes = parseInt($(yellowShirt).text());
+                var previewShirtBlue = $('#hlv-tshirts-preview-blue');
+                var previewShirtYellow = $('#hlv-tshirts-preview-yellow');
+                // console.log(blueVotes, yellowVotes);
+
+                if(blueVotes === yellowVotes) {
+                    // console.log('Equal');
+                    $('.hlv-tshirts-preview-shirt').removeClass('leading');
+                } else if (blueVotes > yellowVotes) {
+                    // console.log('Blue')
+                    $(previewShirtBlue).find('.hlv-tshirts-preview-shirt').addClass('leading');
+                    $(previewShirtYellow).find('.hlv-tshirts-preview-shirt').removeClass('leading');
+                } else {
+                    // console.log('Yellow')
+                    $(previewShirtYellow).find('.hlv-tshirts-preview-shirt').addClass('leading');
+                    $(previewShirtBlue).find('.hlv-tshirts-preview-shirt').removeClass('leading');
+                }
+            });
+        </script>
+    </body>
+</html>
